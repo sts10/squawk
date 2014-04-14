@@ -1,0 +1,7 @@
+Recent tweets in <%= @twitter_username %>'s timeline:
+<br><br>
+<ul>  
+  <% @text_array.each do |tweet_text| %>
+    <li><%= tweet_text %></li>
+  <% end %>
+</ul>
