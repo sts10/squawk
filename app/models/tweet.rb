@@ -9,7 +9,7 @@ class Tweet < ActiveRecord::Base
 
 
   def self.get_tweets
-    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200)
+    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 10)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -21,7 +21,7 @@ class Tweet < ActiveRecord::Base
     end 
 
     1.times do 
-      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200, :max_id => last_id)
+      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 10, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
@@ -35,11 +35,9 @@ class Tweet < ActiveRecord::Base
   end 
 
 
-
-
   def self.make_hash
     hash = {}
-    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200)
+    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 10)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -50,7 +48,7 @@ class Tweet < ActiveRecord::Base
     end
 
     1.times do 
-      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200, :max_id => last_id)
+      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 10, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
@@ -63,6 +61,20 @@ class Tweet < ActiveRecord::Base
 
   def self.tweet_id_to_object(tweet_id)
     MY_TWITTER_CLIENT.status(tweet_id)
+  end
+
+  def self.make_final_hash
+    @final_hash = {}
+    Tweet.make_hash.each do |url_array|
+      url_array.each do |url|
+        if @final_hash.keys.include?(url)
+          @final_hash[url] = @final_hash[url] + 1
+        else
+          @final_hash[url] = 1
+        end
+      end
+    end
+    binding.pry
   end
 
 end 

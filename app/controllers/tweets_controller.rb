@@ -7,6 +7,7 @@ class TweetsController < ApplicationController
     
     @url_array = Tweet.get_tweets 
     @tweet_hash = Tweet.make_hash
+    @final = Tweet.make_final_hash
   end 
 
   # def index
