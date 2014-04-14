@@ -1,5 +1,5 @@
 class Tweet < ActiveRecord::Base
-  def get_tweets(this_user)
+  def self.get_tweets(this_user)
     @timeline = MY_TWITTER_CLIENT.user_timeline(this_user)
     text_array = []
     @timeline.each do |tweet_obj|
