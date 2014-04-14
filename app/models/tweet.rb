@@ -3,14 +3,15 @@ class Tweet < ActiveRecord::Base
   def self.extract_urls(string)
    
     https = /https?:\/\/[\S]+/
-    http = /http?:\/\/[\S]+/
+    # http = /http?:\/\/[\S]+/
 
-    secure_links = https.match(string)
-    other_links = http.match(string)
+    secure_links = https.match(string).to_a
+    # other_links = http.match(string).to_a
+
+    return secure_links
   end
 
 
-  end
 
   def self.get_tweets
     
@@ -22,10 +23,10 @@ class Tweet < ActiveRecord::Base
 
     @timeline.each do |tweet_obj|
       text_array << tweet_obj.text
-      # url_array << extract_mentioned_screen_names("Best website http://google.com @brianpisano87")
+      url_array << extract_urls(" Best website http://google.com @brianpisano87 https://yahoo.com ")
     end 
 
-    2.times do 
+    1.times do 
       @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
@@ -37,7 +38,7 @@ class Tweet < ActiveRecord::Base
       end 
     end  
 
-    return text_array
+    return url_array
   end 
 
 end 
