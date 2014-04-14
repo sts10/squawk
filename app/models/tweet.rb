@@ -75,6 +75,7 @@ class Tweet < ActiveRecord::Base
       end
     end
     binding.pry
+    return @final_hash
   end
 
 end 
