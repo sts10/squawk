@@ -1,4 +1,6 @@
-Recent tweets in <%= @twitter_username %>'s timeline:
+Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
+<br><br>
+<img src="<%= @twitter_avatar_url %>" width="50">
 <br><br>
 <ol>  
   <% @text_array.each do |tweet_text| %>

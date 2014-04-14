@@ -4,6 +4,9 @@ source 'https://rubygems.org'
 # Twitter gem
 gem 'twitter'
 
+# Twitter-oAuth
+gem 'omniauth-twitter'
+
 # hiding stuff
 gem 'figaro', github: 'laserlemon/figaro'
 

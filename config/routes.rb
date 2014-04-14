@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get '/:twitter_username' => 'tweets#show'
+  get '/' => 'tweets#index'
+
+  get '/auth/twitter/callback' => 'tweets#show' 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
