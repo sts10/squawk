@@ -5,7 +5,7 @@ class Tweet < ActiveRecord::Base
     https = /https?:\/\/[\S]+/
     # http = /http?:\/\/[\S]+/
 
-    secure_links = string.scan(https) # https.match(string).to_a
+    secure_links = string.scan(https) 
     # other_links = http.match(string).to_a
 
     return secure_links
@@ -23,7 +23,7 @@ class Tweet < ActiveRecord::Base
 
     @timeline.each do |tweet_obj|
       text_array << tweet_obj.text
-      url_array << extract_urls(" Best website http://google.com @brianpisano87 https://yahoo.com ")
+      url_array << extract_urls(tweet_obj.text)
     end 
 
     1.times do 
@@ -34,7 +34,7 @@ class Tweet < ActiveRecord::Base
       @timeline.each do |tweet_obj|
         text_array << tweet_obj.text
         # url_array << extract_mentioned_screen_names("Best website http://google.com @brianpisano87")
-        # url_array << extract_urls(tweet_obj.text)
+        url_array << extract_urls(tweet_obj.text)
       end 
     end  
 
