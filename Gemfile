@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Twitter Text Gem
+gem 'twitter-text'
 
 # Twitter gem
 gem 'twitter'
