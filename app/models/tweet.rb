@@ -5,7 +5,7 @@ class Tweet < ActiveRecord::Base
     https = /https?:\/\/[\S]+/
     # http = /http?:\/\/[\S]+/
 
-    secure_links = https.match(string).to_a
+    secure_links = string.scan(https) # https.match(string).to_a
     # other_links = http.match(string).to_a
 
     return secure_links
