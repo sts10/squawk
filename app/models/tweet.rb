@@ -1,6 +1,6 @@
 class Tweet < ActiveRecord::Base
   def self.get_tweets
-
+    
     @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 200)
 
     text_array = []
