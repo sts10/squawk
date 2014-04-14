@@ -6,6 +6,7 @@ class TweetsController < ApplicationController
     @twitter_avatar_url = request.env["omniauth.auth"]["info"]["image"]
     
     @url_array = Tweet.get_tweets 
+    @tweet_hash = Tweet.make_hash
   end 
 
   # def index
