@@ -65,7 +65,7 @@ class Tweet < ActiveRecord::Base
 
   def self.make_final_hash
     @final_hash = {}
-    Tweet.make_hash.each do |url_array|
+    Tweet.make_hash.values.each do |url_array|
       url_array.each do |url|
         if @final_hash.keys.include?(url)
           @final_hash[url] = @final_hash[url] + 1
@@ -74,7 +74,7 @@ class Tweet < ActiveRecord::Base
         end
       end
     end
-    binding.pry
+    # binding.pry
     return @final_hash
   end
 
