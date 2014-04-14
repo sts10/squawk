@@ -78,4 +78,7 @@ class Tweet < ActiveRecord::Base
     return @final_hash
   end
 
+  # sort a hash by its values, descending (http://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby): 
+  # final_hash.sort_by {|k,v| v}.reverse
+
 end 

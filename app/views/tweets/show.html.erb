@@ -5,7 +5,7 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 
 <ol>
 <% @final_hash.each do |url, num| %>
-  <li><%= url %> (<%= num %> times)</li>
+  <li><a href="<%= url %>"><%= url %></a> (<%= num %> times)</li>
 <% end %>
 </ol>
 
