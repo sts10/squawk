@@ -53,4 +53,33 @@ class Tweet < ActiveRecord::Base
   # sort a hash by its values, descending (http://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby): 
   # url_count_hash.sort_by {|k,v| v}.reverse
 
-end 
+  def self.get_tweets_from_url_count_hash
+    tweets = []
+    @url_count_hash.keys.each do |url| 
+      make_tweet_id_url_array_hash.each do |tweet_id, url_hash|
+        if url_hash.include?(url)
+          tweets << tweet_id
+        end
+      end
+    end
+    binding.pry
+    return tweets
+  end
+
+  def self.get_tweets_from_one_url(url)
+    tweets = []
+    make_tweet_id_url_array_hash.each do |tweet_id, url_hash|
+      if url_hash.include?(url)
+        tweets << tweet_id
+      end
+    end
+    return tweets
+  end
+
+end
+
+Url = Struct.new(:tweet_ids, :address, :appearances)
+
+  
+
+
