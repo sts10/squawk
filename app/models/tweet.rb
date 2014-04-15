@@ -62,7 +62,7 @@ class Tweet < ActiveRecord::Base
         end
       end
     end
-    binding.pry
+    
     return tweets
   end
 
@@ -84,27 +84,30 @@ class Tweet < ActiveRecord::Base
   
     url_struct_array = []
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
-    # binding.pry
     tweet_id_url_array_hash.values.each do |url_array|
-      url_array.each do |url|
-        if !url_struct_array.empty?
-          url_struct_array.each do |url_struct|
-            if url_struct.address == url
-              url_struct.appearances = url_struct.appearances + 1
-            else
-              new_url_obj = Url.new
-              new_url_obj.address = url
-              new_url_obj.appearances = 1
-              url_struct_array << new_url_obj
-            end
-          end
-        else
-          new_url_obj = Url.new
-          new_url_obj.address = url
-          new_url_obj.appearances = 1
-          url_struct_array << new_url_obj
-        end
-      end
+      # binding.pry
+      puts url_array
+      # url_array.each do |url|
+      #   if url_struct_array != []
+      #     url_struct_array.each do |url_struct|
+      #       if url_struct.address == url
+      #         url_struct.appearances = url_struct.appearances + 1
+      #       else
+      #         new_url_obj = Url.new
+      #         new_url_obj.address = url
+      #         new_url_obj.appearances = 1
+      #         url_struct_array << new_url_obj
+
+      #       end
+      #     end
+      #   else
+      #     new_url_obj = Url.new
+      #     new_url_obj.address = url
+      #     new_url_obj.appearances = 1
+      #     url_struct_array << new_url_obj
+
+      #   end
+      # end
     end
     return url_struct_array
   end
