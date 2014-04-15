@@ -9,7 +9,7 @@ class Tweet < ActiveRecord::Base
 
   def self.make_tweet_id_url_array_hash
     tweet_id_url_array_hash = {}
-    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 170)
+    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 5)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -20,7 +20,7 @@ class Tweet < ActiveRecord::Base
     end
 
     1.times do 
-      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 170, :max_id => last_id)
+      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 5, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
@@ -86,28 +86,30 @@ class Tweet < ActiveRecord::Base
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
     tweet_id_url_array_hash.values.each do |url_array|
       # binding.pry
-      puts url_array
-      # url_array.each do |url|
-      #   if url_struct_array != []
-      #     url_struct_array.each do |url_struct|
-      #       if url_struct.address == url
-      #         url_struct.appearances = url_struct.appearances + 1
-      #       else
-      #         new_url_obj = Url.new
-      #         new_url_obj.address = url
-      #         new_url_obj.appearances = 1
-      #         url_struct_array << new_url_obj
+  
+      url_array.each do |url|
+        # puts url
+        if url_struct_array != []
+          url_struct_array.each do |url_struct|
+            if url_struct.address == url
+              url_struct.appearances = url_struct.appearances + 1
+            else
+              new_url_obj = Url.new
+              new_url_obj.address = url
+              new_url_obj.appearances = 1
+              url_struct_array << new_url_obj
 
-      #       end
-      #     end
-      #   else
-      #     new_url_obj = Url.new
-      #     new_url_obj.address = url
-      #     new_url_obj.appearances = 1
-      #     url_struct_array << new_url_obj
-
-      #   end
-      # end
+            end
+          end
+        else
+          new_url_obj = Url.new
+          new_url_obj.address = url
+          new_url_obj.appearances = 1
+          puts new_url_obj.address
+          url_struct_array << new_url_obj
+          puts "we're in that else block"
+        end
+      end
     end
     return url_struct_array
   end
