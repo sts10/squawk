@@ -5,7 +5,13 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 
 <ol>
 <% @struct_array.each do |url_struct| %>
-  <li><a href="<%= url_struct.address %>"><%= url_struct.address %></a> (<%= url_struct.appearances %> times) </li>
+  <li>
+    <a href="<%= url_struct.address %>"><%= url_struct.address %></a> (<%= url_struct.appearances %> times) 
+    Tweets:
+    <% url_struct.tweet_objs.each do |tweet_obj| %>
+      <%= tweet_obj.text %>,
+    <% end %>
+  </li>
 <% end %>
 
 

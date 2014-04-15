@@ -9,7 +9,7 @@ class Tweet < ActiveRecord::Base
 
   def self.make_tweet_id_url_array_hash
     tweet_id_url_array_hash = {}
-    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 120)
+    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 170)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -20,7 +20,7 @@ class Tweet < ActiveRecord::Base
     end
 
     1.times do 
-      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 120, :max_id => last_id)
+      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 170, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
@@ -78,7 +78,7 @@ class Tweet < ActiveRecord::Base
 
 
 
-  Url = Struct.new(:tweet_ids, :address, :appearances)
+  # Url = Struct.new(:tweet_objs, :address, :appearances)
 
   def self.make_structs
   
@@ -86,7 +86,7 @@ class Tweet < ActiveRecord::Base
     url_was_old = false
 
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
-    tweet_id_url_array_hash.values.each do |url_array|
+    tweet_id_url_array_hash.each do |tweet_id, url_array|
       # binding.pry
   
       url_array.each do |url|
@@ -95,6 +95,7 @@ class Tweet < ActiveRecord::Base
           url_struct_array.each do |url_struct|
             if url_struct.address == url
               url_struct.appearances = url_struct.appearances + 1
+              url_struct.add_tweet_obj(tweet_id_to_object(tweet_id))
               url_was_old = true
               break
             end
@@ -103,15 +104,17 @@ class Tweet < ActiveRecord::Base
             new_url_obj = Url.new
             new_url_obj.address = url
             new_url_obj.appearances = 1
+            new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
+            # new_url_obj.tweet_objs << tweet_id_to_object(tweet_id)
             url_struct_array << new_url_obj
           end
         else
           new_url_obj = Url.new
           new_url_obj.address = url
           new_url_obj.appearances = 1
-          puts new_url_obj.address
+          new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
           url_struct_array << new_url_obj
-          puts "we're in that else block"
+          
         end
       end
     end
