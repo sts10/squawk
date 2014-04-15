@@ -4,7 +4,7 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 <br><br>
 
 <ol>
-<% @final_hash.each do |url, num| %>
+<% @url_count_hash.each do |url, num| %>
   <li><a href="<%= url %>"><%= url %></a> (<%= num %> times)</li>
 <% end %>
 </ol>

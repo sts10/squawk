@@ -35,8 +35,8 @@ class Tweet < ActiveRecord::Base
   end 
 
 
-  def self.make_hash
-    hash = {}
+  def self.make_tweet_id_url_array_hash
+    tweet_id_url_array_hash = {}
     @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 170)
     last_id = @timeline.last.id 
 
@@ -44,7 +44,7 @@ class Tweet < ActiveRecord::Base
     url_array = []
 
     @timeline.each do |tweet_obj|
-      hash[tweet_obj.id] = extract_urls(tweet_obj.text) unless extract_urls(tweet_obj.text).empty?
+      tweet_id_url_array_hash[tweet_obj.id] = extract_urls(tweet_obj.text) unless extract_urls(tweet_obj.text).empty?
     end
 
     1.times do 
@@ -53,32 +53,32 @@ class Tweet < ActiveRecord::Base
       last_id = @timeline.last.id 
 
       @timeline.each do |tweet_obj|
-        hash[tweet_obj.id] = extract_urls(tweet_obj.text)
+        tweet_id_url_array_hash[tweet_obj.id] = extract_urls(tweet_obj.text)
       end 
     end
-    return hash
+    return tweet_id_url_array_hash
   end
 
   def self.tweet_id_to_object(tweet_id)
     MY_TWITTER_CLIENT.status(tweet_id)
   end
 
-  def self.make_final_hash
-    @final_hash = {}
+  def self.make_url_count_hash
+    @url_count_hash = {}
     Tweet.make_hash.values.each do |url_array|
       url_array.each do |url|
-        if @final_hash.keys.include?(url)
-          @final_hash[url] = @final_hash[url] + 1
+        if @url_count_hash.keys.include?(url)
+          @url_count_hash[url] = @url_count_hash[url] + 1
         else
-          @final_hash[url] = 1
+          @url_count_hash[url] = 1
         end
       end
     end
     # binding.pry
-    return @final_hash
+    return @url_count_hash
   end
 
   # sort a hash by its values, descending (http://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby): 
-  # final_hash.sort_by {|k,v| v}.reverse
+  # url_count_hash.sort_by {|k,v| v}.reverse
 
 end 
