@@ -7,7 +7,8 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 <% @url_obj_array.each do |url_obj| %>
   <li>
     <a href="<%= url_obj.address %>"><%= url_obj.address %></a> (<%= url_obj.appearances %> times) 
-    <a id="show_tweets">Tweets:</a>
+    <a id="show_tweets">Show Tweets:</a>
+    <a id="hide_tweets">Hide Tweets:</a>
     <div id="tweets">
     <% url_obj.tweet_objs.each do |tweet_obj| %>
       <%= pretty_tweet(tweet_obj) %><br><br>
