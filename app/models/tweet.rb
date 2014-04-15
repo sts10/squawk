@@ -80,6 +80,25 @@ end
 
 Url = Struct.new(:tweet_ids, :address, :appearances)
 
+  def self.make_structs
+    url_struct_array = []
+    Tweet.make_tweet_id_url_array_hash.values.each do |url_array|
+      url_array.each do |url|
+        url_struct_array.each do |url_struct|
+          if url_struct.address == url
+            url.appearances = url.appearances + 1
+          else
+            this_url = Url.new
+            this_url.address = url
+            url.appearances = 1
+            url_struct_array << this_url
+          end
+        end
+      end
+    end
+    return url_struct_array
+  end
+
   
 
 
