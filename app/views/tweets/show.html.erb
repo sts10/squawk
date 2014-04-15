@@ -9,14 +9,14 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 <% end %>
 </ol>
 
-<br>
+<!-- <br>
 ======================================
 <br>
 <ol>  
-  <% @url_array.each do |tweet_urls| %>
-    <li><%= tweet_urls %></li>
-  <% end %>
-</ol>
+  <%# @url_array.each do |tweet_urls| %>
+    <li><%#= tweet_urls %></li>
+  <%# end %>
+</ol> -->
 
 <%= form_tag("/", method: "get") do %>
   <%= label_tag(:twitter_username, "Search for:") %>
