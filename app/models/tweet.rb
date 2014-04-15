@@ -37,7 +37,7 @@ class Tweet < ActiveRecord::Base
 
   def self.make_url_count_hash
     @url_count_hash = {}
-    Tweet.make_hash.values.each do |url_array|
+    Tweet.make_tweet_id_url_array_hash.values.each do |url_array|
       url_array.each do |url|
         if @url_count_hash.keys.include?(url)
           @url_count_hash[url] = @url_count_hash[url] + 1
