@@ -9,7 +9,7 @@ class Tweet < ActiveRecord::Base
 
   def self.make_tweet_id_url_array_hash
     tweet_id_url_array_hash = {}
-    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 5)
+    @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 120)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -20,7 +20,7 @@ class Tweet < ActiveRecord::Base
     end
 
     1.times do 
-      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 5, :max_id => last_id)
+      @timeline = MY_TWITTER_CLIENT.home_timeline(:count => 120, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
@@ -83,6 +83,8 @@ class Tweet < ActiveRecord::Base
   def self.make_structs
   
     url_struct_array = []
+    url_was_old = false
+
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
     tweet_id_url_array_hash.values.each do |url_array|
       # binding.pry
@@ -93,13 +95,15 @@ class Tweet < ActiveRecord::Base
           url_struct_array.each do |url_struct|
             if url_struct.address == url
               url_struct.appearances = url_struct.appearances + 1
-            else
-              new_url_obj = Url.new
-              new_url_obj.address = url
-              new_url_obj.appearances = 1
-              url_struct_array << new_url_obj
-
+              url_was_old = true
+              break
             end
+          end
+          if !url_was_old
+            new_url_obj = Url.new
+            new_url_obj.address = url
+            new_url_obj.appearances = 1
+            url_struct_array << new_url_obj
           end
         else
           new_url_obj = Url.new
