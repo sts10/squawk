@@ -62,7 +62,7 @@ class Tweet < ActiveRecord::Base
         end
       end
     end
-    binding.pry
+    
     return tweets
   end
 
@@ -76,9 +76,52 @@ class Tweet < ActiveRecord::Base
     return tweets
   end
 
+
+
+  # Url = Struct.new(:tweet_objs, :address, :appearances)
+
+  def self.make_structs
+  
+    url_struct_array = []
+    url_was_old = false
+
+    tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
+    tweet_id_url_array_hash.each do |tweet_id, url_array|
+      # binding.pry
+  
+      url_array.each do |url|
+        # puts url
+        if url_struct_array != []
+          url_struct_array.each do |url_struct|
+            if url_struct.address == url
+              url_struct.appearances = url_struct.appearances + 1
+              url_struct.add_tweet_obj(tweet_id_to_object(tweet_id))
+              url_was_old = true
+              break
+            end
+          end
+          if !url_was_old
+            new_url_obj = Url.new
+            new_url_obj.address = url
+            new_url_obj.appearances = 1
+            new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
+            # new_url_obj.tweet_objs << tweet_id_to_object(tweet_id)
+            url_struct_array << new_url_obj
+          end
+        else
+          new_url_obj = Url.new
+          new_url_obj.address = url
+          new_url_obj.appearances = 1
+          new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
+          url_struct_array << new_url_obj
+          
+        end
+      end
+    end
+    return url_struct_array
+  end
+
 end
-
-
   
 
 

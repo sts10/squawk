@@ -4,9 +4,17 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 <br><br>
 
 <ol>
-<% @url_count_hash.each do |url, num| %>
-  <li><a href="<%= url %>"><%= url %></a> (<%= num %> times) <%= Tweet.get_tweets_from_one_url(url) %> </li>
+<% @struct_array.each do |url_struct| %>
+  <li>
+    <a href="<%= url_struct.address %>"><%= url_struct.address %></a> (<%= url_struct.appearances %> times) 
+    Tweets:
+    <% url_struct.tweet_objs.each do |tweet_obj| %>
+      <%= tweet_obj.text %>,
+    <% end %>
+  </li>
 <% end %>
+
+
 </ol>
 
 <!-- <br>
