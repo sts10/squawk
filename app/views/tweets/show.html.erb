@@ -9,7 +9,7 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
     <a href="<%= url_obj.address %>"><%= url_obj.address %></a> (<%= url_obj.appearances %> times) 
     Tweets:
     <% url_obj.tweet_objs.each do |tweet_obj| %>
-      <%= tweet_obj.text %>,
+      <%= pretty_tweet(tweet_obj) %><br><br>
     <% end %>
   </li>
 <% end %>
@@ -17,3 +17,4 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 
 </ol>
 
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
