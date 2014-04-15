@@ -118,7 +118,7 @@ class Tweet < ActiveRecord::Base
         end
       end
     end
-    return url_struct_array
+    return url_struct_array.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
 end
