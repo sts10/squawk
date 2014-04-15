@@ -4,11 +4,11 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 <br><br>
 
 <ol>
-<% @struct_array.each do |url_struct| %>
+<% @url_obj_array.each do |url_obj| %>
   <li>
-    <a href="<%= url_struct.address %>"><%= url_struct.address %></a> (<%= url_struct.appearances %> times) 
+    <a href="<%= url_obj.address %>"><%= url_obj.address %></a> (<%= url_obj.appearances %> times) 
     Tweets:
-    <% url_struct.tweet_objs.each do |tweet_obj| %>
+    <% url_obj.tweet_objs.each do |tweet_obj| %>
       <%= tweet_obj.text %>,
     <% end %>
   </li>
@@ -17,17 +17,3 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 
 </ol>
 
-<!-- <br>
-======================================
-<br>
-<ol>  
-  <%# @url_array.each do |tweet_urls| %>
-    <li><%#= tweet_urls %></li>
-  <%# end %>
-</ol> -->
-
-<%= form_tag("/", method: "get") do %>
-  <%= label_tag(:twitter_username, "Search for:") %>
-  <%= text_field_tag(:twitter_username) %>
-  <%= submit_tag("Search") %>
-<% end %>

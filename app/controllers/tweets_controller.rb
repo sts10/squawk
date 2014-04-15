@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
     # @tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
     # @url_count_hash = Tweet.make_url_count_hash
 
-    @struct_array = Tweet.make_structs
+    @url_obj_array = Tweet.make_url_objs
   end 
 
   # def index

@@ -35,54 +35,10 @@ class Tweet < ActiveRecord::Base
     MY_TWITTER_CLIENT.status(tweet_id)
   end
 
-  def self.make_url_count_hash
-    @url_count_hash = {}
-    Tweet.make_tweet_id_url_array_hash.values.each do |url_array|
-      url_array.each do |url|
-        if @url_count_hash.keys.include?(url)
-          @url_count_hash[url] = @url_count_hash[url] + 1
-        else
-          @url_count_hash[url] = 1
-        end
-      end
-    end
-    # binding.pry
-    return @url_count_hash
-  end
 
-  # sort a hash by its values, descending (http://stackoverflow.com/questions/4264133/descending-sort-by-value-of-a-hash-in-ruby): 
-  # url_count_hash.sort_by {|k,v| v}.reverse
-
-  def self.get_tweets_from_url_count_hash
-    tweets = []
-    @url_count_hash.keys.each do |url| 
-      make_tweet_id_url_array_hash.each do |tweet_id, url_hash|
-        if url_hash.include?(url)
-          tweets << tweet_id
-        end
-      end
-    end
-    
-    return tweets
-  end
-
-  def self.get_tweets_from_one_url(url)
-    tweets = []
-    make_tweet_id_url_array_hash.each do |tweet_id, url_hash|
-      if url_hash.include?(url)
-        tweets << tweet_id
-      end
-    end
-    return tweets
-  end
-
-
-
-  # Url = Struct.new(:tweet_objs, :address, :appearances)
-
-  def self.make_structs
+  def self.make_url_objs
   
-    url_struct_array = []
+    url_obj_array = []
     url_was_old = false
 
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
@@ -90,12 +46,11 @@ class Tweet < ActiveRecord::Base
       # binding.pry
   
       url_array.each do |url|
-        # puts url
-        if url_struct_array != []
-          url_struct_array.each do |url_struct|
-            if url_struct.address == url
-              url_struct.appearances = url_struct.appearances + 1
-              url_struct.add_tweet_obj(tweet_id_to_object(tweet_id))
+        if url_obj_array != []
+          url_obj_array.each do |url_obj|
+            if url_obj.address == url
+              url_obj.appearances = url_obj.appearances + 1
+              url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
               url_was_old = true
               break
             end
@@ -105,20 +60,19 @@ class Tweet < ActiveRecord::Base
             new_url_obj.address = url
             new_url_obj.appearances = 1
             new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
-            # new_url_obj.tweet_objs << tweet_id_to_object(tweet_id)
-            url_struct_array << new_url_obj
+            url_obj_array << new_url_obj
           end
         else
           new_url_obj = Url.new
           new_url_obj.address = url
           new_url_obj.appearances = 1
           new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id))
-          url_struct_array << new_url_obj
+          url_obj_array << new_url_obj
           
         end
       end
     end
-    return url_struct_array.sort_by{|url_obj| url_obj.appearances}.reverse
+    return url_obj_array.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
 end
