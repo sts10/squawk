@@ -78,7 +78,6 @@ class Tweet < ActiveRecord::Base
 
 end
 
-Url = Struct.new(:tweet_ids, :address, :appearances)
 
   
 
