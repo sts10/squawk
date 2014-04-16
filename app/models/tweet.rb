@@ -68,46 +68,21 @@ class Tweet < ActiveRecord::Base
     url_was_old = false
 
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash(twitter_client)
+
     tweet_id_url_array_hash.each do |tweet_id, url_array|
- 
       url_array.each do |url|
-        if url_obj_array != []
-          url_obj_array.each do |url_obj|
-            # binding.pry
-            
-            if url_obj.address == url
-              url_obj.appearances = url_obj.appearances + 1
-              url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
-              url_was_old = true
-              break
-            end
-          end
-          if !url_was_old
-            new_url_obj = Url.new
-            
-
-            # if tweet is a retweet
-            #   get parent tweet
-            #   set this tweet's url_obj.url = the url in the parent tweet
-            # end  
-
-            # if url_obj.tweet_objs.first.retweet?
-            #   parent_tweet = url_obj.tweet_objs.first.retweeted_tweet
-            # end
-
-            new_url_obj.address = url
-
-            new_url_obj.appearances = 1
-            new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
-            url_obj_array << new_url_obj
-          end
+        if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
+          url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
+          
+          url_obj.appearances = url_obj.appearances + 1
+          url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
         else
           new_url_obj = Url.new
+    
           new_url_obj.address = url
           new_url_obj.appearances = 1
           new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
           url_obj_array << new_url_obj
-          
         end
       end
     end
