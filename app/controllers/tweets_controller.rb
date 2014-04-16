@@ -9,7 +9,7 @@ class TweetsController < ApplicationController
     @oauth_token = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token]
     @oauth_token_secret = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token_secret]
 
-
+    
     @url_obj_array = Tweet.make_url_objs(Tweet.make_twitter_client(@oauth_token, @oauth_token_secret))
   end 
 
