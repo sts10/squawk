@@ -3,6 +3,7 @@ class Tweet < ActiveRecord::Base
   def self.extract_urls(string)
     https = /https?:\/\/[\S]+/
     secure_links = string.scan(https) 
+    secure_links.reject!{|link| link.include?("\u2026")}
     return secure_links
   end
 
@@ -21,11 +22,11 @@ class Tweet < ActiveRecord::Base
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 50)
+    timeline = twitter_client.home_timeline(:count => 199)
     last_id = timeline.last.id 
 
     2.times do 
-        timeline = timeline + twitter_client.home_timeline(:count => 50, :max_id => last_id)
+        timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
         # timeline.flatten
         i = i + 1
         # if !timeline.last 
@@ -71,20 +72,22 @@ class Tweet < ActiveRecord::Base
 
     tweet_id_url_array_hash.each do |tweet_id, url_array|
       url_array.each do |url|
-        if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
-          url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
+
+        url_obj = url_obj_array.detect {|url_obj| url_obj.address == url } 
+        if url_obj
+        # if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
+          # url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
 
           url_obj.appearances = url_obj.appearances + 1
           url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
-        else # elsif well_formed?(url)
+        else
           new_url_obj = Url.new
     
           new_url_obj.address = url
-          # if new_url_obj.well_formed?
+          
           new_url_obj.appearances = 1
           new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
           url_obj_array << new_url_obj
-          # end
         end
       end
     end

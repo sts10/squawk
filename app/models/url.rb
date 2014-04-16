@@ -14,6 +14,7 @@ class Url
   end 
 
   def well_formed?
+    # binding.pry
     self.address[-1] != '.' && self.address[-2] != '.'
   end 
   
