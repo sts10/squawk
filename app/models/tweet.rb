@@ -19,7 +19,7 @@ class Tweet < ActiveRecord::Base
   def self.make_tweet_id_url_array_hash(twitter_client)
     tweet_id_url_array_hash = {}
 
-    @timeline = twitter_client.home_timeline(:count => 170)
+    @timeline = twitter_client.home_timeline(:count => 175)
     last_id = @timeline.last.id 
 
     text_array = []
@@ -30,7 +30,7 @@ class Tweet < ActiveRecord::Base
     end
 
     1.times do 
-      @timeline = twitter_client.home_timeline(:count => 170, :max_id => last_id)
+      @timeline = twitter_client.home_timeline(:count => 175, :max_id => last_id)
       # binding.pry
       last_id = @timeline.last.id 
 
