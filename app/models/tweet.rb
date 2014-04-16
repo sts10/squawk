@@ -69,8 +69,7 @@ class Tweet < ActiveRecord::Base
 
     tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash(twitter_client)
     tweet_id_url_array_hash.each do |tweet_id, url_array|
-      # binding.pry
-  
+ 
       url_array.each do |url|
         if url_obj_array != []
           url_obj_array.each do |url_obj|
