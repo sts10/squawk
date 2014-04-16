@@ -19,17 +19,26 @@ class Tweet < ActiveRecord::Base
   def self.make_tweet_id_url_array_hash(twitter_client)
     tweet_id_url_array_hash = {}
 
-    @timeline = twitter_client.home_timeline(:count => 150)
+    timeline = []
+
+    timeline = twitter_client.home_timeline(:count => 150)
+    last_id = timeline.last.id 
+
+    1.times do 
+        timeline = timeline + twitter_client.home_timeline(:count => 175, :max_id => last_id)
+        timeline.flatten
+        # binding.pry
+        if !timeline.last 
+          break
+        end
+        last_id = timeline.last.id 
+    end 
 
     # @timeline_count = @timeline.count
-    puts "TIMELINE COUNT: #{@timeline.count}"
+    puts "TIMELINE COUNT: #{timeline.count}"
 
-    last_id = @timeline.last.id 
 
-    text_array = []
-    url_array = []
-
-    @timeline.each do |tweet_obj|
+    timeline.each do |tweet_obj|
       tweet_id_url_array_hash[tweet_obj.id] = extract_urls(tweet_obj.text) unless extract_urls(tweet_obj.text).empty?
     end
 
