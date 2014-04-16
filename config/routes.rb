@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get '/' => 'tweets#index'
 
-  get '/auth/twitter/callback' => 'tweets#show' 
+  get '/auth/twitter/callback' => 'timelines#show' 
 
 
   # The priority is based upon order of creation: first created -> highest priority.
