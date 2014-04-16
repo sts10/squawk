@@ -1,0 +1,25 @@
+<%= render 'layouts/navbar' %>
+
+Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
+<br><br>
+<img src="<%= @twitter_avatar_url %>" width="50">
+<br><br>
+
+<ol>
+<% @url_obj_array.each do |url_obj| %>
+  <li>
+    <a href="<%= url_obj.address %>"><%= url_obj.address %></a> (<%= url_obj.appearances %> times) 
+    <a id="show_tweets">Show Tweets:</a>
+    <a id="hide_tweets">Hide Tweets:</a>
+    <div id="tweets">
+    <% url_obj.tweet_objs.each do |tweet_obj| %>
+      <%= pretty_tweet(tweet_obj) %><br><br>
+    <% end %>
+    </div>
+  </li>
+<% end %>
+
+
+</ol>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

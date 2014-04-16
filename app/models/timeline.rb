@@ -22,7 +22,7 @@ class Timeline # < ActiveRecord::Base
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 199)
+    timeline = twitter_client.home_timeline(:count => 2)
     last_id = timeline.last.id 
 
     # 2.times do 
