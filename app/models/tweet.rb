@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
   def self.extract_urls(string)
     https = /https?:\/\/[\S]+/
     secure_links = string.scan(https) 
-    secure_links.reject!{|link| link.include?("\u2026")}
+    # secure_links.reject!{|link| link.include?("\u2026")}
     return secure_links
   end
 
@@ -25,15 +25,11 @@ class Tweet < ActiveRecord::Base
     timeline = twitter_client.home_timeline(:count => 199)
     last_id = timeline.last.id 
 
-    2.times do 
-        timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
-        # timeline.flatten
-        i = i + 1
-        # if !timeline.last 
-        #   break
-        # end
-        last_id = timeline.last.id 
-    end 
+    # 2.times do 
+    #     timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
+    #     i = i + 1
+    #     last_id = timeline.last.id 
+    # end 
 
     # @timeline_count = @timeline.count
     puts "TIMELINE COUNT: #{timeline.count}. Loop executed #{i} times."
