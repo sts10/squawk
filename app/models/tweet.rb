@@ -18,24 +18,24 @@ class Tweet < ActiveRecord::Base
 
   def self.make_tweet_id_url_array_hash(twitter_client)
     tweet_id_url_array_hash = {}
-
+    i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 150)
+    timeline = twitter_client.home_timeline(:count => 199)
     last_id = timeline.last.id 
 
-    1.times do 
-        timeline = timeline + twitter_client.home_timeline(:count => 175, :max_id => last_id)
-        timeline.flatten
-        # binding.pry
-        if !timeline.last 
-          break
-        end
+    3.times do 
+        timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
+        # timeline.flatten
+        i = i + 1
+        # if !timeline.last 
+        #   break
+        # end
         last_id = timeline.last.id 
     end 
 
     # @timeline_count = @timeline.count
-    puts "TIMELINE COUNT: #{timeline.count}"
+    puts "TIMELINE COUNT: #{timeline.count}. Loop executed #{i} times."
 
 
     timeline.each do |tweet_obj|
@@ -74,6 +74,8 @@ class Tweet < ActiveRecord::Base
       url_array.each do |url|
         if url_obj_array != []
           url_obj_array.each do |url_obj|
+            # binding.pry
+            
             if url_obj.address == url
               url_obj.appearances = url_obj.appearances + 1
               url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
@@ -83,7 +85,19 @@ class Tweet < ActiveRecord::Base
           end
           if !url_was_old
             new_url_obj = Url.new
+            
+
+            # if tweet is a retweet
+            #   get parent tweet
+            #   set this tweet's url_obj.url = the url in the parent tweet
+            # end  
+
+            # if url_obj.tweet_objs.first.retweet?
+            #   parent_tweet = url_obj.tweet_objs.first.retweeted_tweet
+            # end
+
             new_url_obj.address = url
+
             new_url_obj.appearances = 1
             new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
             url_obj_array << new_url_obj
@@ -98,6 +112,8 @@ class Tweet < ActiveRecord::Base
         end
       end
     end
+    # url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+
     return url_obj_array.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
