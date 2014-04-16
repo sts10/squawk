@@ -13,4 +13,8 @@ class Url
     @tweet_objs << tweet_obj
   end 
 
+  def well_formed?
+    self.address[-1] != '.' && self.address[-2] != '.'
+  end 
+  
 end 

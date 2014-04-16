@@ -21,11 +21,11 @@ class Tweet < ActiveRecord::Base
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 199)
+    timeline = twitter_client.home_timeline(:count => 50)
     last_id = timeline.last.id 
 
-    3.times do 
-        timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
+    2.times do 
+        timeline = timeline + twitter_client.home_timeline(:count => 50, :max_id => last_id)
         # timeline.flatten
         i = i + 1
         # if !timeline.last 
@@ -73,22 +73,28 @@ class Tweet < ActiveRecord::Base
       url_array.each do |url|
         if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
           url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
-          
+
           url_obj.appearances = url_obj.appearances + 1
           url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
-        else
+        else # elsif well_formed?(url)
           new_url_obj = Url.new
     
           new_url_obj.address = url
+          # if new_url_obj.well_formed?
           new_url_obj.appearances = 1
           new_url_obj.add_tweet_obj(tweet_id_to_object(tweet_id, twitter_client))
           url_obj_array << new_url_obj
+          # end
         end
       end
     end
     # url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
     return url_obj_array.sort_by{|url_obj| url_obj.appearances}.reverse
+  end
+
+  def self.well_formed?(url)
+    url[-1] != '.' && url[-2] != '.'
   end
 
 end
