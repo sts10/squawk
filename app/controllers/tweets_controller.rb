@@ -4,12 +4,13 @@ class TweetsController < ApplicationController
     @twitter_username = request.env["omniauth.auth"]["info"]["nickname"] # params[:twitter_username]
     @user_name = request.env["omniauth.auth"]["info"]["name"]
     @twitter_avatar_url = request.env["omniauth.auth"]["info"]["image"]
+    # binding.pry
     
-    # @url_array = Tweet.get_tweets 
-    # @tweet_id_url_array_hash = Tweet.make_tweet_id_url_array_hash
-    # @url_count_hash = Tweet.make_url_count_hash
+    @oauth_token = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token]
+    @oauth_token_secret = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token_secret]
 
-    @url_obj_array = Tweet.make_url_objs
+
+    @url_obj_array = Tweet.make_url_objs(Tweet.make_twitter_client(@oauth_token, @oauth_token_secret))
   end 
 
   # def index
