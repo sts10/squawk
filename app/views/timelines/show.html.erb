@@ -9,7 +9,7 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
   <div style="margin-left: 40px">
     <h2><%= url_obj.appearances %> times </h2>
    
-    <div class="tweets" style="overflow-x: scroll; position: relative;">
+    <div class="tweets row" style="overflow-x: scroll; position: relative;">
       <% url_obj.tweet_objs.each_with_index do |tweet_obj, i| %>
       <div id="tweet_num_<%= i %>" class="individual_tweet">
         <%= pretty_tweet(tweet_obj) %>
