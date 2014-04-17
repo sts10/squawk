@@ -13,9 +13,10 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
     <a id="hide_tweets">Hide Tweets:</a>
     <div id="tweets">
     <% url_obj.tweet_objs.each do |tweet_obj| %>
-      <%= pretty_tweet(tweet_obj) %><br><br>
+      <%= pretty_tweet(tweet_obj) %>
     <% end %>
     </div>
+    <div class="clearfix"></div>
   </li>
 <% end %>
 
