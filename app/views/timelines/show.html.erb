@@ -1,8 +1,6 @@
 <%= render 'layouts/navbar' %>
 
-Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
-<br><br>
-<img src="<%= @twitter_avatar_url %>" width="50">
+<img src="<%= @twitter_avatar_url %>" width="50"> <h2> Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:</h2>
 <br><br>
 
 <% @url_obj_array.each do |url_obj| %>
