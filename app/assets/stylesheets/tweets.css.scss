@@ -6,6 +6,18 @@
   content: "<span class="glyphicon glyphicon-chevron-right expander"></span>";
 }*/
 
+div.individual_tweet {
+  display: none;
+}
+
+.expander {
+  cursor: pointer;
+  // line-height: 50px; 
+  font-size: 50px;
+  
+}
+
+
 .new-button {
    border-top: 1px solid #214a63;
    background: #195278;
