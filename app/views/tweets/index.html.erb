@@ -1,6 +1,20 @@
-<center><h1 class="title">Welcome to Squawk!</h1></center>
+<center>
+  <h1 class="title">
+    Welcome to Squawk!
+  </h1>
+</center>
 
-<center><%= link_to (image_tag "squawker.png"), 'auth/twitter' %></center>
+<center>
+  <%#= link_to (image_tag "squawker.png"), 'auth/twitter' %>
+  <%#= link_to ("<div id=\"get_squawks\">Get Squawks</div>".html_safe), {:class => "squawk_link"}, 'auth/twitter' %>
+
+<%= link_to('auth/twitter') do %>
+  <%= image_tag ("squawker.png") %>
+  <div id="get_squawks">Get Squawks</div>
+<% end %>
+
+</center>
+
 
 <!-- <center><%#= link_to "Fucking Log In", 'auth/twitter', :class => "new-button" %></center> -->
 
