@@ -21,6 +21,9 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
   </div>
 <% end %>
 
+<% if @url_obj_array == [] %>
+<h2>Sorry, I didn't find any Squawks</h2>
+<% end %>
 
 
 
