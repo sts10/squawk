@@ -18,15 +18,16 @@ $(document).ready(function(){
   // alert("this works");
 
   
-  $("div.individual_tweet").hide();
+  $(".individual_tweet").hide();
 
+  // $(".number_of_times").show();
+  $(".tweet_num_0").show();
+  // $(".arrow").show();
 
-  $("div#tweet_num_0").show();
-
-  $("span.expander").on("click", function(){
-    $(this).siblings("div.individual_tweet").show();
+  $("td.expander").on("click", function(){
+    $(this).siblings(".individual_tweet").show();
     $(this).removeClass("glyphicon-chevron-right").hide();
-  })
+  });
 
   // $('div#carousel-example-generic').carousel()
 
