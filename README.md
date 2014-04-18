@@ -2,39 +2,27 @@
 
 ## Description
 
-Add a short description of your app.
-
-## Screenshots
-
-Add some spiffy screenshots of your app here.
+A Twitter reader that searches your timeline for URLs that have been tweeted more than once.
 
 ## Background
 
-Why did you want to make this app? What was your development process
-like?
-
-## Features
-
-Bullet point some of the key features of your app here.
+If you only check your Twitter timeline once a day, you'll only see a few tweets from that day. Squawk takes the last ~2,000 tweets from your timeline and finds the links that have been mentioned more than once by people you follow. 
 
 ## Usage
 
-How do users use your app?
+Click the parrot, OAuth into Twitter, get your squawks. 
 
 ## Development/Contribution
 
-Explain how people can contribute to your app. How should they write tests?
-Any things in particular you'd like to see in pull requests?
+Want to contribute? We're currently/always working on writing more Rspec tests. 
 
-## Future
+## Authors
 
-What features are you currently working on? Only mention things that you
-actually are implementing. No pie-in-the-sky-never-gonna-happen stuff.
+[Brian Pisano](https://github.com/brian1987)
 
-## Author
-
-Link to your blog, twitter, etc!
+[Sam Schlinkert](https://github.com/sts10)
 
 ## License
 
-My Spiffy App is MIT Licensed. See LICENSE for details.
+Squawk is MIT Licensed. See LICENSE for details.
+
