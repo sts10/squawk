@@ -88,8 +88,7 @@ class Timeline # < ActiveRecord::Base
   def filter_url_obj_array(url_obj_array)
     url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
-    # here's where i would loop to weed out same user tweeting the same link twice
-    
+    # loop to weed out same user tweeting the same link twice
     url_obj_array.each do |url_obj|
       url_users = []
       url_obj.tweet_objs.each do |tweet_obj|
@@ -102,7 +101,7 @@ class Timeline # < ActiveRecord::Base
     end
 
     url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
-    
+
     return url_obj_array
   end
 
