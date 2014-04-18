@@ -1,38 +1,33 @@
-// Place all the styles related to the tweets controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 
-/*#tweet_num_0:after { 
-  content: "<span class="glyphicon glyphicon-chevron-right expander"></span>";
-}*/
 
-// div.individual_tweet {
-//   display: none;
-// }
+// index page css
+
+#parrot {
+  margin-top: 0px;
+  text-align: center;
+}
+
+#parrot a:hover {
+  text-decoration: none;
+}
+
+#parrot img {
+  width: 600px;
+}
 
 #get_squawks {
   position: relative; 
   width: 100px; 
-  top: -277px; 
-  left: -50px; 
-  color: white; 
-  font-size: 40px; 
   text-align: left;
-
+  margin: 0 auto;
+  top: -329px; 
+  left: -72px; 
+  color: white; 
+  font-size: 48px;
+  line-height: 61px; 
 }
 
-.squawk_link:hover {
-  text-decoration: none;
-}
-
-.expander {
-  cursor: pointer;
-  // line-height: 50px; 
-  font-size: 50px;
-  
-}
-
-
+// show page css
 
 .tweet_row td {
   padding-right: 20px;
@@ -44,10 +39,19 @@
   font-size: 45px; 
   background-color: black; 
   border-radius: 100%; 
+  // border: 3px black dotted;
   color: white; 
   text-align: center; 
   line-height: 60px;
 }
+
+.expander {
+  cursor: pointer;
+  font-size: 50px; 
+}
+
+
+
 
 
 .new-button {
