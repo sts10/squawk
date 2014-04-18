@@ -1,44 +1,48 @@
 <%= render 'layouts/navbar' %>
 
-Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
-<br><br>
-<img src="<%= @twitter_avatar_url %>" width="50">
-<br><br>
+<div class="container">
 
-<table>
-<% @url_obj_array.each do |url_obj| %>
-  
-    <!-- <h2><%#= url_obj.appearances %> times</h2> -->
-   
-    <!-- <div class="tweets" style="overflow-x: scroll; position: relative;">  -->
-      <!-- had a class of row -->
-      
-    <tr class="tweet_row">
-      <td class="number_of_times" height="60px" width="60px">
-        <span style="font-size: 36px; background-color: black; border-radius: 100%; color: white; text-align: center; line-height: 60px;"><%= url_obj.appearances %></span>
-      </td>
 
-      <% url_obj.tweet_objs.each_with_index do |tweet_obj, i| %>
-        <td width="400px" height="500px" class="individual_tweet tweet_num_<%= i %>">
-        <div>         
-          <%= pretty_tweet(tweet_obj) %>
-        </div>
+  <h2>
+    <img src="<%= @twitter_avatar_url %>" width="60" style="padding-right:20px;">
+    Recent squawks in <%= @user_name %>'s (<a href="http://twitter.com/<%= @twitter_username %>"><%= @twitter_username %></a>) timeline:
+  </h2>
+
+
+  <table>
+  <% @url_obj_array.each do |url_obj| %>
+    
+      <!-- <h2><%#= url_obj.appearances %> times</h2> -->
+     
+      <!-- <div class="tweets" style="overflow-x: scroll; position: relative;">  -->
+        <!-- had a class of row -->
+        
+      <tr class="tweet_row">
+        <td class="number_of_times" height="60px" width="60px">
+          <span><%= url_obj.appearances %></span>
         </td>
-      <% end %>
-      <td class="arrow expander">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </td>
-    </tr>
-      
-    <!-- </div> -->
-    <!-- <div class="clearfix"></div> -->
-<% end %>
-</table>
 
-<% if @url_obj_array == [] %>
-<h2>Sorry, I didn't find any Squawks</h2>
-<% end %>
+        <% url_obj.tweet_objs.each_with_index do |tweet_obj, i| %>
+          <td width="400px" height="400px" class="individual_tweet tweet_num_<%= i %>">
+          <div>         
+            <%= pretty_tweet(tweet_obj) %>
+          </div>
+          </td>
+        <% end %>
+        <td class="arrow expander">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </td>
+      </tr>
+        
+      <!-- </div> -->
+      <!-- <div class="clearfix"></div> -->
+  <% end %>
+  </table>
+
+  <% if @url_obj_array == [] %>
+  <h2>Sorry, I didn't find any Squawks</h2>
+  <% end %>
 
 
-
+</div>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
