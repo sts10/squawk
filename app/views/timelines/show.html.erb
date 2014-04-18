@@ -7,19 +7,20 @@ Recent tweets in <%= @user_name %>'s (<%= @twitter_username %>) timeline:
 
 <% @url_obj_array.each do |url_obj| %>
   <div style="margin-left: 40px">
-    <h2><%= url_obj.appearances %> times </h2>
+    <h2><%= url_obj.appearances %> times</h2>
    
     <div class="tweets" style="overflow-x: scroll; position: relative;"> <!-- had a class of row -->
       <table>
         <tr>
+          <td>Here's a fucking td</td>
       <% url_obj.tweet_objs.each_with_index do |tweet_obj, i| %>
-        <!-- <td width="300px" height="500px"> -->
+        <td width="300px" height="500px">
         <div id="tweet_num_<%= i %>" class="individual_tweet">
          
         <%= pretty_tweet(tweet_obj) %>
     
         </div>
-        <!-- </td> -->
+        </td>
       <% end %>
         <span class="glyphicon glyphicon-chevron-right expander"></span>
         </tr>
