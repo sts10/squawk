@@ -27,7 +27,7 @@ class Timeline # < ActiveRecord::Base
     timeline = []
 
     timeline = twitter_client.home_timeline(:count => 199)
-    last_id = timeline.last.id - 1
+    last_id = timeline.last.id - 1 
 
     4.times do 
         timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)

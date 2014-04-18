@@ -28,6 +28,7 @@ $(document).ready(function(){
     $(this).removeClass("glyphicon-chevron-right").hide();
   })
 
+  // $('div#carousel-example-generic').carousel()
 
 
 
