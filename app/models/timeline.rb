@@ -79,12 +79,31 @@ class Timeline # < ActiveRecord::Base
         end
       end
     end
-    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+
+    filter_url_obj_array(url_obj_array)
 
     return url_obj_array.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
-  # def self.well_formed?(url)
-  #   url[-1] != '.' && url[-2] != '.'
-  # end
+  def filter_url_obj_array(url_obj_array)
+    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+
+    # here's where i would loop to weed out same user tweeting the same link twice
+    
+    url_obj_array.each do |url_obj|
+      url_users = []
+      url_obj.tweet_objs.each do |tweet_obj|
+        url_users << tweet_obj.user_handle
+        if url_users.count != url_users.uniq.count
+          url_obj.tweet_objs.delete(tweet_obj)
+          url_obj.appearances = url_obj.appearances - 1
+        end
+      end
+    end
+
+    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+    
+    return url_obj_array
+  end
+
 end 
