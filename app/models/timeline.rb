@@ -26,12 +26,12 @@ class Timeline # < ActiveRecord::Base
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 175)
+    timeline = twitter_client.home_timeline(:count => 199)
     last_id = timeline.last.id - 1 
 
-    2.times do 
+    6.times do 
       sleep(1)
-      timeline = timeline + twitter_client.home_timeline(:count => 175, :max_id => last_id)
+      timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
       i = i + 1
       last_id = timeline.last.id - 1
     end 
@@ -95,6 +95,7 @@ class Timeline # < ActiveRecord::Base
       url_users = []
       url_obj.tweet_objs.each do |tweet_obj|
         if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
+          binding.pry
           url_obj.tweet_objs.delete(tweet_obj)
           url_obj.appearances = url_obj.appearances - 1
         else
