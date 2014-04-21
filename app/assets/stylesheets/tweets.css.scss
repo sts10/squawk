@@ -94,9 +94,22 @@
    }
 
 .title {
-    font-size: 60px;
-    line-height: 40px;
-    font-family: Impact, Charcoal, sans-serif;
+  font-size: 60px;
+  line-height: 40px;
+  font-family: Impact, Charcoal, sans-serif;
+}
+
+#about-div {
+  position: fixed; 
+  bottom: -200px;
+}
+
+#about-description{
+  text-align: justify;
+  font-size: 22px;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /*
