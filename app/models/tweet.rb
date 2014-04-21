@@ -1,4 +1,4 @@
-class Tweet # < ActiveRecord::Base
+class Tweet 
   attr_reader :tweet_id
   attr_reader :text
   attr_reader :user_name
