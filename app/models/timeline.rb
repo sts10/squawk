@@ -63,14 +63,14 @@ class Timeline # < ActiveRecord::Base
 
 
     @tweets.each do |tweet|
-      tweet.url_array.each do |url|
+      tweet.expanded_urls.each do |url|
 
         url_obj = url_obj_array.detect {|url_obj| url_obj.address == url } 
        
         if url_obj
+          binding.pry
         # if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
           # url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
-
           url_obj.appearances = url_obj.appearances + 1
           url_obj.add_tweet_obj(tweet)
         else

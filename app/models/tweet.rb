@@ -14,21 +14,31 @@ class Tweet # < ActiveRecord::Base
     @tweet_url = tweet_obj.url
     @created_at = tweet_obj.created_at
 
-    @url_array = self.extract_urls
+    # @url_array = self.extract_urls
+
+    @expanded_urls = tweet_obj.urls.map { |url| url.attrs[:expanded_url] }
   end
 
-  def extract_urls
-    https = /https?:\/\/[\S]+/
-    links = self.text.scan(https) 
-    links.reject!{|link| link.include?("\u2026")}
-    # self.url_array = links
-    return links
-  end 
+  # def extract_urls
+  #   https = /https?:\/\/[\S]+/
+  #   links = self.text.scan(https) 
+  #   links.reject!{|link| link.include?("\u2026")}
+  #   # self.url_array = links
+  #   return links
+  # end 
+
+  # def get_expanded_urls
+  #   self.urls[0].attrs[:expanded_url]
+  # end 
 
   def url_array 
     @url_array
   end 
 
+  def expanded_urls 
+    @expanded_urls
+  end
+  
   # def add_url(url)
   #   @url_array << url
   # end  
