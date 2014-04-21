@@ -68,9 +68,6 @@ class Timeline # < ActiveRecord::Base
         url_obj = url_obj_array.detect {|url_obj| url_obj.address == url } 
        
         if url_obj
-          binding.pry
-        # if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
-          # url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
           url_obj.appearances = url_obj.appearances + 1
           url_obj.add_tweet_obj(tweet)
         else
@@ -91,20 +88,20 @@ class Timeline # < ActiveRecord::Base
   end
 
   def filter_url_obj_array(url_obj_array)
-    # url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
-    # # loop to weed out same user tweeting the same link twice
-    # url_obj_array.each do |url_obj|
-    #   url_users = []
-    #   url_obj.tweet_objs.each do |tweet_obj|
-    #     if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
-    #       url_obj.tweet_objs.delete(tweet_obj)
-    #       url_obj.appearances = url_obj.appearances - 1
-    #     else
-    #       url_users << tweet_obj.user_handle
-    #     end
-    #   end
-    # end
+    # loop to weed out same user tweeting the same link twice
+    url_obj_array.each do |url_obj|
+      url_users = []
+      url_obj.tweet_objs.each do |tweet_obj|
+        if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
+          url_obj.tweet_objs.delete(tweet_obj)
+          url_obj.appearances = url_obj.appearances - 1
+        else
+          url_users << tweet_obj.user_handle
+        end
+      end
+    end
 
     url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
