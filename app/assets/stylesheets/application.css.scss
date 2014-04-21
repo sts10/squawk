@@ -38,9 +38,11 @@ body {
 #footer {
   position: fixed;
   bottom: 0px;
-  // height: 40px;
+  right: 0px;
+  // height: 60px;
   background-color: #ccc;
-  width: 100%;
-  padding-left: 40px;
+  width: 445px;
+  border-top-left-radius:26px;
+  padding-left: 14px;
   padding-top: 10px;
 }
