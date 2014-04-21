@@ -26,13 +26,14 @@ class Timeline # < ActiveRecord::Base
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 199)
+    timeline = twitter_client.home_timeline(:count => 175)
     last_id = timeline.last.id - 1 
 
-    3.times do 
-        timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
-        i = i + 1
-        last_id = timeline.last.id - 1
+    2.times do 
+      sleep(1)
+      timeline = timeline + twitter_client.home_timeline(:count => 175, :max_id => last_id)
+      i = i + 1
+      last_id = timeline.last.id - 1
     end 
 
     puts "TIMELINE COUNT: #{timeline.count}. Loop executed #{i} times."
@@ -46,9 +47,9 @@ class Timeline # < ActiveRecord::Base
     # binding.pry
   end
 
-  # def tweet_id_to_object(tweet_id, twitter_client)
-  #   twitter_client.status(tweet_id)
-  # end
+  def tweet_id_to_object(tweet_id, twitter_client)
+    twitter_client.status(tweet_id)
+  end
 
 
   def make_url_objs(twitter_client)
@@ -58,10 +59,14 @@ class Timeline # < ActiveRecord::Base
 
     self.make_tweets(twitter_client)
 
+    # binding.pry # tweet_id_to_object(458218688852676609, twitter_client)
+
+
     @tweets.each do |tweet|
       tweet.url_array.each do |url|
 
         url_obj = url_obj_array.detect {|url_obj| url_obj.address == url } 
+       
         if url_obj
         # if url_obj_array != [] && url_obj_array.detect {|url_obj| url_obj.address == url }
           # url_obj = url_obj_array.detect {|url_obj| url_obj.address == url }
@@ -86,20 +91,20 @@ class Timeline # < ActiveRecord::Base
   end
 
   def filter_url_obj_array(url_obj_array)
-    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+    # url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
-    # loop to weed out same user tweeting the same link twice
-    url_obj_array.each do |url_obj|
-      url_users = []
-      url_obj.tweet_objs.each do |tweet_obj|
-        if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
-          url_obj.tweet_objs.delete(tweet_obj)
-          url_obj.appearances = url_obj.appearances - 1
-        else
-          url_users << tweet_obj.user_handle
-        end
-      end
-    end
+    # # loop to weed out same user tweeting the same link twice
+    # url_obj_array.each do |url_obj|
+    #   url_users = []
+    #   url_obj.tweet_objs.each do |tweet_obj|
+    #     if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
+    #       url_obj.tweet_objs.delete(tweet_obj)
+    #       url_obj.appearances = url_obj.appearances - 1
+    #     else
+    #       url_users << tweet_obj.user_handle
+    #     end
+    #   end
+    # end
 
     url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
 
