@@ -5,11 +5,18 @@
 #parrot {
   margin-top: 0px;
   text-align: center;
+  position: relative;
+  top: 0;
+  transition: top 0.4s;
+  -webkit-transition: top 0.4s; /*, left 0.2s; /* Safari */
 }
 
 #parrot a:hover {
   text-decoration: none;
+  transition: top 0.2s;
+  -webkit-transition: top 0.2s; /*, left 0.2s; /* Safari */
 }
+
 
 #parrot img {
   width: 600px;

@@ -95,7 +95,6 @@ class Timeline # < ActiveRecord::Base
       url_users = []
       url_obj.tweet_objs.each do |tweet_obj|
         if url_users.include?(tweet_obj.user_handle)  # if url_users.count != url_users.uniq.count
-          binding.pry
           url_obj.tweet_objs.delete(tweet_obj)
           url_obj.appearances = url_obj.appearances - 1
         else
