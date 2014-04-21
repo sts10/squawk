@@ -34,3 +34,13 @@ body {
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
+
+#footer {
+  position: fixed;
+  bottom: 0px;
+  // height: 40px;
+  background-color: #ccc;
+  width: 100%;
+  padding-left: 40px;
+  padding-top: 10px;
+}
