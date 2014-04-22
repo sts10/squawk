@@ -16,9 +16,7 @@ class Timeline
     end
   end 
 
-
   def make_tweets
-    i = 0 
     timeline = []
 
     timeline = @twitter_client.home_timeline(:count => 199)
@@ -27,19 +25,12 @@ class Timeline
     4.times do 
       sleep(1)
       timeline = timeline + @twitter_client.home_timeline(:count => 199, :max_id => last_id)
-      i = i + 1
       last_id = timeline.last.id - 1
     end 
-
-    puts "TIMELINE COUNT: #{timeline.count}. Loop executed #{i} times."
 
     timeline.each do |tweet_obj|
       @tweets << Tweet.new(tweet_obj)
     end
-  end
-
-  def tweet_id_to_object(tweet_id)
-    @twitter_client.status(tweet_id)
   end
 
   def make_url_objs
@@ -63,7 +54,7 @@ class Timeline
 
     self.filter_url_objs
 
-    return @url_objs.sort_by{|url_obj| url_obj.appearances}.reverse
+    @url_objs.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
   def filter_url_objs

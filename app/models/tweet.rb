@@ -13,13 +13,8 @@ class Tweet
     @user_handle = tweet_obj.user.handle
     @tweet_url = tweet_obj.url
     @created_at = tweet_obj.created_at
-    @expanded_urls = tweet_obj.urls.map { |url| url.attrs[:expanded_url] }
-    # @url_array = self.extract_urls
+    @expanded_urls = tweet_obj.urls.map { |url| url.attrs[:expanded_url] }    
   end
-
-  def url_array 
-    @url_array
-  end 
 
   def expanded_urls 
     @expanded_urls
