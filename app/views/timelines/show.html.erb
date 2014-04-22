@@ -2,21 +2,13 @@
 
 <div class="container">
 
-
   <h2>
     <img src="<%= @twitter_avatar_url %>" width="60" style="margin-right:12px;">
     Recent squawks in <%= @user_name %>'s (<a href="http://twitter.com/<%= @twitter_username %>">@<%= @twitter_username %></a>) timeline:
   </h2>
 
-
-  <table>
-  <% @url_obj_array.each do |url_obj| %>
-    
-      <!-- <h2><%#= url_obj.appearances %> times</h2> -->
-     
-      <!-- <div class="tweets" style="overflow-x: scroll; position: relative;">  -->
-        <!-- had a class of row -->
-        
+  <table id="tweet_table" width="<%= @max_appearances * 400 %>px">
+  <% @url_obj_array.each do |url_obj| %>     
       <tr class="tweet_row">
         <td class="number_of_times" height="60px" width="60px">
           <span><%= url_obj.appearances %>x</span>
@@ -34,8 +26,6 @@
         </td>
       </tr>
         
-      <!-- </div> -->
-      <!-- <div class="clearfix"></div> -->
   <% end %>
   </table>
 

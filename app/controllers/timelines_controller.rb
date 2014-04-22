@@ -10,7 +10,7 @@ class TimelinesController < ApplicationController
     @oauth_token = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token]
     @oauth_token_secret = request.env["omniauth.auth"]["extra"]["access_token"].params[:oauth_token_secret]
 
-    
     @url_obj_array = @timeline.make_url_objs(@timeline.make_twitter_client(@oauth_token, @oauth_token_secret))
+    @max_appearances = @timeline.get_max_appearances(@url_obj_array)
   end 
 end

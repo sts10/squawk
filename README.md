@@ -12,10 +12,6 @@ If you only check your Twitter timeline once a day, you'll only see a few tweets
 
 Click the parrot, OAuth into Twitter, get your squawks. 
 
-## Development/Contribution
-
-Want to contribute? We're currently/always working on writing more Rspec tests
-
 ## Authors
 
 [Brian Pisano](https://github.com/brian1987)

@@ -87,4 +87,8 @@ class Timeline
     return url_obj_array
   end
 
+  def get_max_appearances(url_obj_array)
+    url_obj_array.max_by { |url_obj| url_obj.appearances }.appearances.to_i
+  end
+
 end 
