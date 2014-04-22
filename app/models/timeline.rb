@@ -1,7 +1,9 @@
 class Timeline 
 
-  def initialize
+  def initialize(token, secret)
+    @twitter_client = self.make_twitter_client(token, secret)
     @tweets = []
+    
   end 
 
   def make_twitter_client(token, secret)
@@ -14,16 +16,16 @@ class Timeline
   end 
 
 
-  def make_tweets(twitter_client)
+  def make_tweets
     i = 0 
     timeline = []
 
-    timeline = twitter_client.home_timeline(:count => 199)
+    timeline = @twitter_client.home_timeline(:count => 199)
     last_id = timeline.last.id - 1 
 
     4.times do 
       sleep(1)
-      timeline = timeline + twitter_client.home_timeline(:count => 199, :max_id => last_id)
+      timeline = timeline + @twitter_client.home_timeline(:count => 199, :max_id => last_id)
       i = i + 1
       last_id = timeline.last.id - 1
     end 
@@ -35,14 +37,14 @@ class Timeline
     end
   end
 
-  def tweet_id_to_object(tweet_id, twitter_client)
-    twitter_client.status(tweet_id)
+  def tweet_id_to_object(tweet_id)
+    @twitter_client.status(tweet_id)
   end
 
-  def make_url_objs(twitter_client)
+  def make_url_objs
     url_obj_array = []
 
-    self.make_tweets(twitter_client)
+    self.make_tweets
 
     @tweets.each do |tweet|
       tweet.expanded_urls.each do |url|
