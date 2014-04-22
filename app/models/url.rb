@@ -3,6 +3,7 @@ class Url
 
   def initialize 
     @tweet_objs = []
+    @appearances = 1
   end 
 
   def tweet_objs 
@@ -12,10 +13,4 @@ class Url
   def add_tweet_obj(tweet_obj)
     @tweet_objs << tweet_obj
   end 
-
-  def well_formed?
-    # binding.pry
-    self.address[-1] != '.' && self.address[-2] != '.'
-  end 
-  
 end 

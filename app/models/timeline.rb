@@ -3,7 +3,8 @@ class Timeline
   def initialize(token, secret)
     @twitter_client = self.make_twitter_client(token, secret)
     @tweets = []
-    
+    @url_objs = []
+
   end 
 
   def make_twitter_client(token, secret)
@@ -42,13 +43,11 @@ class Timeline
   end
 
   def make_url_objs
-    url_obj_array = []
-
     self.make_tweets
 
     @tweets.each do |tweet|
       tweet.expanded_urls.each do |url|
-        url_obj = url_obj_array.detect {|url_obj| url_obj.address == url } 
+        url_obj = @url_objs.detect {|url_obj| url_obj.address == url } 
       
         if url_obj
           url_obj.appearances = url_obj.appearances + 1
@@ -56,23 +55,22 @@ class Timeline
         else
           new_url_obj = Url.new
           new_url_obj.address = url
-          new_url_obj.appearances = 1
           new_url_obj.add_tweet_obj(tweet)
-          url_obj_array << new_url_obj
+          @url_objs << new_url_obj
         end
       end
     end
 
-    filter_url_obj_array(url_obj_array)
+    self.filter_url_objs
 
-    return url_obj_array.sort_by{|url_obj| url_obj.appearances}.reverse
+    return @url_objs.sort_by{|url_obj| url_obj.appearances}.reverse
   end
 
-  def filter_url_obj_array(url_obj_array)
-    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
+  def filter_url_objs
+    @url_objs.select!{ |url_obj| url_obj.appearances > 1 }
 
     # loop to weed out same user tweeting the same link twice
-    url_obj_array.each do |url_obj|
+    @url_objs.each do |url_obj|
       url_users = []
       url_obj.tweet_objs.each do |tweet_obj|
         if url_users.include?(tweet_obj.user_handle) 
@@ -84,9 +82,7 @@ class Timeline
       end
     end
 
-    url_obj_array.select!{ |url_obj| url_obj.appearances > 1 }
-
-    return url_obj_array
+    @url_objs.select!{ |url_obj| url_obj.appearances > 1 }
   end
 
   def get_max_appearances(url_obj_array)
