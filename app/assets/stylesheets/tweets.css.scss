@@ -8,13 +8,13 @@
   position: relative;
   top: 0;
   transition: top 0.4s;
-  -webkit-transition: top 0.4s; /*, left 0.2s; /* Safari */
+  -webkit-transition: top 0.4s; 
 }
 
 #parrot a:hover {
   text-decoration: none;
   transition: top 0.2s;
-  -webkit-transition: top 0.2s; /*, left 0.2s; /* Safari */
+  -webkit-transition: top 0.2s; 
 }
 
 
@@ -36,6 +36,10 @@
 
 // show page css
 
+.tweet_row {
+  width: 100%;
+}
+
 .tweet_row td {
   padding-right: 20px;
 }
@@ -45,8 +49,7 @@
   width: 60px; 
   font-size: 40px; 
   background-color: black; 
-  border-radius: 100%; 
-  // border: 3px black dotted;
+  border-radius: 100%;
   color: white; 
   text-align: center; 
   line-height: 60px;
@@ -57,7 +60,9 @@
   font-size: 50px; 
 }
 
-
+.reset_table_width {
+  width: auto;
+}
 
 
 
