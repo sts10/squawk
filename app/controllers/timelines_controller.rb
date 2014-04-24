@@ -1,6 +1,5 @@
 class TimelinesController < ApplicationController
   def show
-    
     @twitter_username = request.env["omniauth.auth"]["info"]["nickname"]
     @user_name = request.env["omniauth.auth"]["info"]["name"]
     @twitter_avatar_url = request.env["omniauth.auth"]["info"]["image"]
