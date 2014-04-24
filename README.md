@@ -18,6 +18,12 @@ Click the parrot, OAuth into Twitter, get your squawks.
 
 [Sam Schlinkert](https://github.com/sts10)
 
+## Relevant Blog Posts
+
+[Part 1: Connecting to Twitter](http://sts10.github.io/blog/2014/04/21/squawkbot-connecting-to-twitter/)
+
+[Part 2: Extracting URLs](http://sts10.github.io/blog/2014/04/24/squawkbot-part-2-extracting-urls/)
+
 ## License
 
 Squawk is MIT Licensed. See LICENSE for details.
