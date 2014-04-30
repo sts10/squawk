@@ -12,6 +12,14 @@ If you only check your Twitter timeline once a day, you'll only see a few tweets
 
 Click the parrot, OAuth into Twitter, get your squawks. 
 
+## Screenshots
+
+Index Page:
+![Index Page](/public/images/squawkbot_home.png "Index Page")
+
+Results Page:
+![Results Page](/public/images/squawkbot_results.png "Results Page")
+
 ## Authors
 
 [Brian Pisano](https://github.com/brian1987)
