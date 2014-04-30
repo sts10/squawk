@@ -1,4 +1,4 @@
-# Squawk
+# SquawkBot
 
 [http://squawkbot.herokuapp.com/](http://squawkbot.herokuapp.com/)
 
@@ -6,7 +6,7 @@
 
 A Twitter reader that searches your timeline for URLs that have been tweeted more than once.
 
-If you only check your Twitter timeline once a day, you'll only see a few tweets from that day. Squawk takes the last ~1,000 tweets from your timeline and finds all the links that have been mentioned by 2 or more people who you follow. 
+If you only check your Twitter timeline once a day, you'll only see a few tweets from that day. SquawkBot takes the last ~1,000 tweets from your timeline and finds all the links that have been mentioned by 2 or more people who you follow. 
 
 ## Usage
 
