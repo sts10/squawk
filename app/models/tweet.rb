@@ -1,10 +1,6 @@
 class Tweet 
-  attr_reader :tweet_id
-  attr_reader :text
-  attr_reader :user_name
-  attr_reader :user_handle
-  attr_reader :tweet_url
-  attr_reader :created_at
+  attr_reader :tweet_id, :text, :user_name, :user_handle,
+              :tweet_url, :created_at, :expanded_urls
 
   def initialize(tweet_obj)
     @tweet_id = tweet_obj.id
@@ -16,10 +12,6 @@ class Tweet
     @expanded_urls = tweet_obj.urls.map { |url| url.attrs[:expanded_url] }    
   end
 
-  def expanded_urls 
-    @expanded_urls
-  end
-  
 end
   
 
